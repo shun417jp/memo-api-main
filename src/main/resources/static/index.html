@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244c40">
+  <title>memo — 日々のことを、ひとつずつ。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='8' y='4' width='25' height='32' rx='3' fill='%23244c40'/%3E%3Cpath d='M14 5v30' stroke='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="memo ホーム">
+      <svg viewBox="0 0 32 40" aria-hidden="true"><rect x="6" y="3" width="23" height="34" rx="3"/><path d="M2 10h7M2 30h7"/></svg>
+      <span>memo</span>
+    </a>
+    <p class="tagline">日々のことを、ひとつずつ。</p>
+    <button class="primary new-note" id="new-note" type="button"><span aria-hidden="true">＋</span> 新しいメモ</button>
+  </header>
+  <main>
+    <div class="page-heading"><h1>すべてのメモ</h1><p id="note-count" role="status">読み込み中…</p></div>
+    <div class="notice" id="list-error" role="alert" hidden><span></span><button id="retry" type="button">再読み込み</button></div>
+    <div class="workspace">
+      <section class="note-sidebar" aria-label="メモ一覧">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>
+          <input id="search" type="search" placeholder="メモを検索" aria-label="メモを検索" autocomplete="off">
+        </div>
+        <ul id="note-list" class="note-list" aria-label="検索結果" aria-busy="true"></ul>
+        <p id="list-empty" class="list-empty" hidden></p>
+      </section>
+      <article class="paper" id="reader" aria-label="メモ詳細" aria-busy="false">
+        <div id="reader-placeholder" class="reader-placeholder"><span class="paper-mark" aria-hidden="true">m.</span><h2>あなたの言葉を、ここに。</h2><p>メモを選ぶと、ここに内容が表示されます。</p></div>
+        <div id="reader-note" hidden>
+          <time id="reader-date"></time><h2 id="reader-title" tabindex="-1"></h2>
+          <div id="reader-content" class="note-content"></div>
+          <footer id="reader-id"></footer>
+        </div>
+        <div id="detail-error" class="notice" role="alert" hidden><span></span><button id="retry-detail" type="button">再試行</button></div>
+      </article>
+    </div>
+  </main>
+  <dialog id="compose" aria-labelledby="compose-title">
+    <form id="note-form">
+      <div class="dialog-heading"><h2 id="compose-title">新しいメモ</h2><button id="close-dialog" class="close" type="button" aria-label="閉じる">×</button></div>
+      <p class="dialog-description">思いついたことを、気軽に書き留めましょう。</p>
+      <label for="title">タイトル <span>必須</span></label>
+      <input id="title" name="title" required placeholder="メモのタイトル" autocomplete="off">
+      <label for="content">本文</label>
+      <textarea id="content" name="content" rows="9" placeholder="ここから、書き始める。"></textarea>
+      <p class="form-error" id="save-error" role="alert" hidden></p>
+      <div class="form-footer"><span id="character-count">0文字</span><div><button id="cancel" class="secondary" type="button">キャンセル</button><button id="save" class="primary" type="submit">保存する</button></div></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" class="toast" hidden></div>
+</body>
+</html>
