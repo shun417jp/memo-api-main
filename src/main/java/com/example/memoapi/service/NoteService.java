@@ -1,6 +1,7 @@
 package com.example.memoapi.service;
 
 import com.example.memoapi.dto.Note;
+import com.example.memoapi.exception.NoteArgumentNotValidException;
 import com.example.memoapi.exception.NoteNotFoundException;
 import com.example.memoapi.repository.NoteRepository;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class NoteService {
     }
 
     public Note saveNote(Note note){
+        if (note.getTitle() == null || note.getTitle().isBlank()) {
+            throw new NoteArgumentNotValidException("タイトルを入力してください。");
+        }
         noteRepository.insertNote(note);
         return note;
     }
