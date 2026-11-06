@@ -1,8 +1,6 @@
 package com.example.memoapi.repository;
 
 import com.example.memoapi.dto.Note;
-import com.example.memoapi.exception.NoteArgumentNotValidException;
-import com.example.memoapi.exception.NoteNotFoundException;
 import com.example.memoapi.mapper.NoteMapper;
 import org.springframework.stereotype.Repository;
 
@@ -28,18 +26,4 @@ public class NoteRepository {
         return noteMapper.findById(id);
     }
 
-    public Note saveNote(Note note){
-        if (note.getTitle() == null || note.getTitle().isEmpty()){
-            throw new NoteNotFoundException("TItle is empty");
-        }
-
-        // content
-        if (note.getContent() == null || note.getContent().isEmpty()){
-            throw new NoteArgumentNotValidException("content is empty");
-        }
-
-        NoteRepository.insertNote(note){
-
-        }
-    }
 }
