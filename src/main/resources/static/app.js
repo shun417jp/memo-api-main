@@ -165,6 +165,8 @@ $("note-form").addEventListener("submit", async (event) => {
     $("toast").hidden = false;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { $("toast").hidden = true; }, 4000);
+    // Refresh the full list after invalidating any pre-save list response.
+    void loadNotes();
   } catch (error) {
     $("save-error").textContent = error.message;
     $("save-error").hidden = false;
